@@ -11,4 +11,7 @@ Route::namespace('App\Http\Controllers')->group(function() {
         });
         Route::get('/', 'Admin\IndexController')->name('admin.index');
     });
+    
+    
+    Route::get('/', 'Catalog\IndexController')->name('catalog.index');
 });

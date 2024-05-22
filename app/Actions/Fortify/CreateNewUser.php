@@ -17,6 +17,13 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
+    
+    private function checkAnyUserExist(): string
+    {
+        return User::all()->toarray() ? 'user' : 'admin';
+    }
+
+
     public function create(array $input): User
     {
         Validator::make($input, [
@@ -33,7 +40,9 @@ class CreateNewUser implements CreatesNewUsers
 
         return User::create([
             'name' => $input['name'],
+            'login' => $input['login'],
             'email' => $input['email'],
+            'role' => $this->checkAnyUserExist(),
             'password' => Hash::make($input['password']),
         ]);
     }
