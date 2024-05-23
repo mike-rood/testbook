@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Catalog\Book;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('components.admin.user.index');
+        //
     }
 
     /**

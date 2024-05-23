@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('login')->after('name')->unique();
-            $table->string('role')->after('login');
+        Schema::create('books', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->year('year');
+            $table->text('description');
+            $table->string('isbn');
+            $table->string('cover_image')->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -23,9 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['login', 'role']);
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('books');
     }
 };

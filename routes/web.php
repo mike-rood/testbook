@@ -12,6 +12,14 @@ Route::namespace('App\Http\Controllers')->group(function() {
         Route::get('/', 'Admin\IndexController')->name('admin.index');
     });
     
+    Route::prefix('catalog')->group(function() {
+        Route::name('catalog.')->group(function() {
+            Route::resource('author', 'Catalog\Author\AuthorController');
+            
+            
+            Route::get('/', 'Catalog\IndexController')->name('index');
+        });
+    });
     
-    Route::get('/', 'Catalog\IndexController')->name('catalog.index');
+    Route::view('/', 'components.about')->name('about');
 });
