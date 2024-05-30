@@ -15,8 +15,7 @@ Route::namespace('App\Http\Controllers')->group(function() {
     Route::prefix('catalog')->group(function() {
         Route::name('catalog.')->group(function() {
             Route::resource('author', 'Catalog\Author\AuthorController');
-            
-            
+            Route::resource('book', 'Catalog\Book\BookController');            
             Route::get('/', 'Catalog\IndexController')->name('index');
         });
     });

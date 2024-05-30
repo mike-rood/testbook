@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Catalog\Author;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Author;
+use App\Http\Requests\catalog\author\StoreRequest;
+use App\Http\Requests\catalog\author\UpdateRequest;
 
 class AuthorController extends Controller
 {
@@ -12,7 +14,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return view('components.catalog.author.index');
+        $authors = Author::paginate(10);        
+        return view('components.catalog.author.index', compact('authors'));
     }
 
     /**
@@ -20,15 +23,17 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.catalog.author.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        Author::firstOrCreate($data);
+        return redirect()->route('catalog.author.index');
     }
 
     /**
@@ -42,24 +47,27 @@ class AuthorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Author $author)
     {
-        //
+        return view('components.catalog.author.edit', compact('author'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, Author $author)
     {
-        //
+        $data = $request->validated();
+        $author->update($data);
+        return redirect()->route('catalog.author.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        return redirect()->route('catalog.author.index');
     }
 }
