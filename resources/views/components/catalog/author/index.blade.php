@@ -9,7 +9,9 @@
         @foreach($authors as $author)
         <li>
             <div>
-                {{ trim($author->first_name . ' ' . $author->second_name . ' ' . $author->third_name) }}
+                <a href="{{ route('catalog.author.show', $author->id) }}">
+                    {{ trim($author->first_name . ' ' . $author->second_name . ' ' . $author->third_name) }}
+                </a>
             </div>
             @auth()
             @if(auth()->user()->role === 'admin')
